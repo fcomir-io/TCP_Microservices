@@ -1,0 +1,39 @@
+version: '3.7'
+
+networks:
+  server-network:
+    driver: bridge
+
+services:
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: ./sample-backend
+      target: development
+    volumes:
+      - .:/usr/src/app/backend
+      - /usr/src/app/backend/node_modules
+    ports:
+      - '3000:3000'
+    networks:
+      - server-network
+    command: npm run start:dev
+    links:
+      - communication
+    depends_on:
+      - communication
+  communication:
+    container_name: communication
+    restart: always
+    build:
+      context: ./sample-communication
+      target: development
+    volumes:
+      - .:/usr/src/app/communication
+      - /usr/src/app/communication/node_modules       
+    ports:
+      - "8877:8877"
+    networks:
+      - server-network           
+    command: npm run start:dev  
