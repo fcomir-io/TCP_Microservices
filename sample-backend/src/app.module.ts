@@ -9,6 +9,18 @@ import { AppService } from './app.service';
       {
         name: 'COMMUNICATION',
         transport: Transport.TCP,
+        options: {
+          host: 'micro_service_comm', // container name
+          port: 3010
+        }
+      },
+      {
+        name: 'ANALYTICS',
+        transport: Transport.TCP,
+        options: {
+          host: 'micro_service_anly', // container name
+          port: 3011
+        }
       },
     ]),
   ],

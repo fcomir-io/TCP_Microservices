@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -8,12 +8,12 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        host: 'micro_service_comm', // container name
-        port: 3010,
+        host: 'micro_service_anly',   // container name
+        port: 3011,
       },
     },
   );
   app.listen();
-  console.log("COMM is up")
+  console.log("AMALYTICS is up")
 }
 bootstrap();

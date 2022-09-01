@@ -21,10 +21,12 @@ services:
     command: npm run start:dev
     links:
       - communication
+      - analytics
     depends_on:
       - communication
+      - analytics
   communication:
-    container_name: communication
+    container_name: micro_service_comm
     restart: always
     build:
       context: ./sample-communication
@@ -33,7 +35,21 @@ services:
       - .:/usr/src/app/communication
       - /usr/src/app/communication/node_modules       
     ports:
-      - "8877:8877"
+      - "3010:3010"
     networks:
       - server-network           
     command: npm run start:dev  
+  analytics:
+    container_name: micro_service_anly
+    restart: always
+    build:
+      context: ./sample-analytics
+      target: development
+    volumes:
+      - .:/usr/src/app/analytics
+      - /usr/src/app/analytics/node_modules       
+    ports:
+      - "3011:3011"
+    networks:
+      - server-network           
+    command: npm run start:dev      

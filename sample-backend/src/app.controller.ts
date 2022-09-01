@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 import { CreateUserRequestDTO } from './dtos/create-user-request.dto';
 
 @Controller()
-export class AppController {  
+export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
@@ -20,4 +20,11 @@ export class AppController {
   createUser(@Body() createUserRequest: CreateUserRequestDTO) {
     this.appService.createUser(createUserRequest);
   }
+
+  @Get('analytics')
+  getAnalytics() :string{
+    console.log("GET ANALYTICS")
+    return this.appService.getAnalytics();
+  }
+  
 }
